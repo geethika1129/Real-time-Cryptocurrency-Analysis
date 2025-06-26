@@ -1,13 +1,36 @@
-# Real-time-Cryptocurrency-Analysis
-This project demonstrates an end-to-end real-time streaming analytics solution for cryptocurrency market data. It is designed to simulate a production-grade pipeline:
+# 💸 Real-time Cryptocurrency Market Analysis Pipeline
+## 📌 Project Description
+This project demonstrates a real-time data pipeline for cryptocurrency price analysis, using live data from the CoinGecko API. The architecture is designed with Azure Event Hub, Azure Databricks, and Power BI to simulate an event-driven analytics platform.
 
-Data is fetched in real-time from CoinGecko API.
+✅ Data Ingestion:
+Live or periodic cryptocurrency prices (e.g., Bitcoin, Ethereum) are fetched from the CoinGecko API and ingested into Azure Event Hub, simulating real-time data streams.
 
-Azure Event Hub acts as a high-throughput broker to ingest and buffer the incoming events.
+✅ Real-time Processing in Azure Databricks:
+Using Structured Streaming in Databricks, the price data is read from Event Hub, processed in near-real-time, and cleaned/aggregated as necessary.
 
-Azure Databricks (or alternatively a Python-based batch process) consumes the stream, performs transformations such as calculating daily percentage changes and moving averages, and writes the processed data into Delta Lake.
+✅ Delta Lake Storage (Bronze → Silver → Gold):
 
-Power BI Desktop connects to the Delta Lake (or to the transformed CSV file) for interactive real-time visualization and analysis.
+Bronze: Raw JSON streamed from CoinGecko via Event Hub
+
+Silver: Cleaned price + timestamp
+
+Gold: Aggregated insights (e.g., % change, moving average)
+
+## ✅ Power BI Visualization:
+The Gold Delta table is used as a source for Power BI dashboards, visualizing price trends, comparisons, and volatility over time.
+
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/5e0c6677-d847-4882-8bcc-e7e2f09a2866" />
+
+## 🔄 Extendability
+This architecture can easily be extended to:
+
+Multiple coins
+
+Live alerting (e.g., threshold breaches)
+
+Prediction models (e.g., future price forecasting)
+
+Auto-refreshing Power BI dashboards
 
 ## Architecture
        +----------------------+
@@ -41,8 +64,7 @@ Power BI Desktop connects to the Delta Lake (or to the transformed CSV file) for
        | (Visualization)      |
        +----------------------+
 
-## Power BI Analysis
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/5e0c6677-d847-4882-8bcc-e7e2f09a2866" />
+
 
 
 
